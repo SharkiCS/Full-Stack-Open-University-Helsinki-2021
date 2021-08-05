@@ -35,15 +35,6 @@ const Statistic = ({ text, value }) =>
   </tr>
 )
 
-const Buttons = ({ clickHandleGood, clickHandleNeutral, clickHandleBad }) =>
-(
-  <>
-    <Button onClick={clickHandleGood} text="Good" />
-    <Button onClick={clickHandleNeutral} text="Neutral" />
-    <Button onClick={clickHandleBad} text="Bad" />
-  </>
-)
-
 const Button = ({ onClick, text }) => (<button onClick={onClick}>{text}</button>)
 
 const App = () => {
@@ -58,11 +49,9 @@ const App = () => {
   return (
     <div>
       <Title text='give feedback' />
-      <Buttons
-        clickHandleGood={clickHandleGood}
-        clickHandleNeutral={clickHandleNeutral}
-        clickHandleBad={clickHandleBad}
-      />
+      <Button onClick={clickHandleGood} text="Good" />
+      <Button onClick={clickHandleNeutral} text="Neutral" />
+      <Button onClick={clickHandleBad} text="Bad" />
       <Title text='statistics' />
       <Statistics good={good} neutral={neutral} bad={bad} />
     </div>
