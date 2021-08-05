@@ -11,30 +11,38 @@ const Statistics = ({ good, neutral, bad }) => {
   if (good !== 0 || neutral !== 0 || bad !== 0) {
     return (
       <div>
-        <Statistic text="Good" value={good} />
-        <Statistic text="Neutral" value={neutral} />
-        <Statistic text="Bad" value={bad} />
-        <Statistic text="Total" value={total} />
-        <Statistic text="Average" value={average} />
-        <Statistic text="Positive" value={positive} />
+        <table>
+          <Statistic text="Good" value={good} />
+          <Statistic text="Neutral" value={neutral} />
+          <Statistic text="Bad" value={bad} />
+          <Statistic text="Total" value={total} />
+          <Statistic text="Average" value={average} />
+          <Statistic text="Positive" value={positive} />
+        </table>
       </div>
+
     )
   }
 
   return <p>No feedback given</p>
 }
 
-const Statistic = ({ text, value }) => (<p> {text}: {value}</p>)
+const Statistic = ({ text, value }) =>
+(
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
+)
 
-const Buttons = ({ clickHandleGood, clickHandleNeutral, clickHandleBad }) => {
-  return (
-    <>
-      <Button onClick={clickHandleGood} text="Good" />
-      <Button onClick={clickHandleNeutral} text="Neutral" />
-      <Button onClick={clickHandleBad} text="Bad" />
-    </>
-  )
-}
+const Buttons = ({ clickHandleGood, clickHandleNeutral, clickHandleBad }) =>
+(
+  <>
+    <Button onClick={clickHandleGood} text="Good" />
+    <Button onClick={clickHandleNeutral} text="Neutral" />
+    <Button onClick={clickHandleBad} text="Bad" />
+  </>
+)
 
 const Button = ({ onClick, text }) => (<button onClick={onClick}>{text}</button>)
 
