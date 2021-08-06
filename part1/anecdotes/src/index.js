@@ -25,7 +25,7 @@ const App = (props) => {
   })
 
   const clickHandleRandom = () =>
-    setSelected(Math.floor(Math.random() * (anecdotes.length - 1)))
+    setSelected(Math.floor(Math.random() * anecdotes.length))
 
   const clickHandleVote = () => {
     const newObject = {
