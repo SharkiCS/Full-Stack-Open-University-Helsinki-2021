@@ -6,7 +6,7 @@ const Title = (props) => (<h1>{props.text}</h1>)
 const Statistics = ({ good, neutral, bad }) => {
   const total = good + neutral + bad
   const positive = good === 0 ? `${0} %` : `${(good * 100) / total} %`
-  const average = good + bad * -1
+  const average = (good - bad) / total
 
   if (good !== 0 || neutral !== 0 || bad !== 0) {
     return (
