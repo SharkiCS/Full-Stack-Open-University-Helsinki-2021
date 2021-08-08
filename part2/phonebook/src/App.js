@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 import FormPerson from './components/FormPerson'
 import Filter from './components/Filter'
@@ -7,12 +8,7 @@ import Persons from './components/Persons'
 const Title = (props) => <h2>{props.text}</h2>
 
 const App = () => {
-    const [persons, setPersons] = useState([
-        { name: 'Arto Hellas', number: '040-123456' },
-        { name: 'Ada Lovelace', number: '39-44-5323523' },
-        { name: 'Dan Abramov', number: '12-43-234345' },
-        { name: 'Mary Poppendieck', number: '39-23-6423122' }
-    ])
+    const [persons, setPersons] = useState([])
 
     const [newName, setNewName] = useState('')
     const [newNumber, setNewNumber] = useState('')
@@ -66,6 +62,15 @@ const App = () => {
     const filter = newFilter !== ''
         ? persons.filter(person => person.name.startsWith(newFilter))
         : persons
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:3001/persons')
+            .then(response => {
+                setPersons(response.data)
+            })
+    }, [])
+
 
     return (
         <div>
