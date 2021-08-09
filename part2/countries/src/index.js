@@ -19,7 +19,6 @@ const Countrie = ({ data }) => {
 
   const { name, capital, population, languages, flag } = data[0]
 
-  console.log(languages);
   return (
     <div>
       <h1>{name}</h1>
@@ -31,7 +30,7 @@ const Countrie = ({ data }) => {
       <ul>
         {languages.map(language => <li key={language.iso639_1}>{language.name}</li>)}
       </ul>
-      <img src={flag} width="150" height="150" />
+      <img src={flag} width="150" height="150" alt={name}/>
     </div>
   )
 }
@@ -57,7 +56,7 @@ const App = () => {
 
   return (
     <div>
-      <input value={search} onChange={handleValueOnChange} />
+      <input value={search} onChange={handleValueOnChange}/>
       <Filter data={data} search={search} />
     </div>
   )
