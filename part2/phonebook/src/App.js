@@ -60,7 +60,7 @@ const App = () => {
     const handleFilterChange = (e) => setFilter(e.target.value)
 
     const filter = newFilter !== ''
-        ? persons.filter(person => person.name.startsWith(newFilter))
+        ? persons.filter(person => person.name.toLowerCase().includes(newFilter.toLowerCase()))
         : persons
 
     useEffect(() => {
