@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import './index.css'
 
 import FormPerson from './components/FormPerson'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
 
+import { NotificationError, NotificationSucessful } from './components/Notification'
+
 import personService from './services/persons'
+
 
 const Title = (props) => <h2>{props.text}</h2>
 
@@ -15,10 +19,11 @@ const App = () => {
     const [newNumber, setNewNumber] = useState('')
     const [newFilter, setFilter] = useState('')
 
+    const [messageError, setMessageError] = useState(null)
+    const [messageSuccessful, setMessageSuccessful] = useState(null)
+
     const addPerson = (e) => {
         e.preventDefault()
-
-
 
         if (newName === '' || newNumber === '') {
             alert('Fill all the fields.')
@@ -49,9 +54,7 @@ const App = () => {
                                 .filter((p) => p.name !== newName)
                                 .concat(returnedPerson)
                         )
-
                     })
-
                 return
             }
         }
@@ -62,6 +65,12 @@ const App = () => {
                 setPersons(persons.concat(returnedPersons))
                 setNewName('')
                 setNewNumber('')
+
+                setMessageSuccessful(
+                    `Added '${personObject.name}'`
+                )
+
+                setTimeout(() => { setMessageSuccessful(null) }, 5000)
             })
     }
 
@@ -84,7 +93,11 @@ const App = () => {
     return (
         <div>
             <Title text="Phonebook" />
+            <NotificationSucessful message={messageSuccessful} />
+            <NotificationError message={messageError} />
+
             <Filter value={newFilter} onChange={handleFilterChange} />
+
 
             <Title text="Add a new" />
             <FormPerson
@@ -96,7 +109,12 @@ const App = () => {
             />
 
             <Title text="Numbers" />
-            <Persons personsArr={filter} persons={persons} setPersons={setPersons} />
+            <Persons personsArr={filter}
+                persons={persons}
+                setPersons={setPersons}
+                messageError={messageError}
+                setMessageError={setMessageError}
+            />
         </div>
     )
 }
